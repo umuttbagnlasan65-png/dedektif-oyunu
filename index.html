@@ -1,2 +1,78 @@
 <!DOCTYPE html>
-<html><body>Hazırlanıyor...</body></html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ceset Arayışı</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #111;
+      color: #eee;
+      margin-top: 50px;
+    }
+    .game {
+      margin: 20px auto;
+      width: 300px;
+    }
+    button {
+      padding: 15px 25px;
+      margin: 10px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #666;
+    }
+    .message {
+      font-size: 20px;
+      margin-top: 20px;
+      height: 60px;
+    }
+    a.reward-link {
+      color: #00ffcc;
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🕵️ Ceset Arayışı</h1>
+  <div class="game">
+    <button onclick="move('up')">⬆️</button><br>
+    <button onclick="move('left')">⬅️</button>
+    <button onclick="move('down')">⬇️</button>
+    <button onclick="move('right')">➡️</button>
+  </div>
+  <div class="message" id="message">Doğru yolu bul!</div>
+
+  <script>
+    const correctPath = ['left', 'left', 'right', 'up', 'right', 'left', 'up'];
+    let currentStep = 0;
+
+    function move(direction) {
+      if (direction === correctPath[currentStep]) {
+        currentStep++;
+        if (currentStep === correctPath.length) {
+          document.getElementById("message").innerHTML = `
+            🎉 <strong>Tebrikler Elif ve Dilara Başardınız!</strong><br>
+            İşte Ödülünüz:
+            <a class="reward-link" href="https://drive.google.com/file/d/10QcLguvbSBtWwULMDpWjWYQI4ZrmbK15/view" target="_blank">
+              🎁 Ödülü Görüntüle
+            </a>`;
+        } else {
+          document.getElementById("message").innerText = `Doğru! ${currentStep}/${correctPath.length}`;
+        }
+      } else {
+        currentStep = 0;
+        document.getElementById("message").innerText = "💀 Yanlış yol! Baştan başla.";
+      }
+    }
+  </script>
+</body>
+</html>
